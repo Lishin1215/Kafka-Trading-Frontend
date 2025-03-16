@@ -14,25 +14,25 @@ interface Order {
 const HistoryPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userid, setuserid] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
 
   // If you want to enforce login, uncomment:
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
-    const storedUserId = localStorage.getItem("userId");
-    if (!storedUserId || !storedUsername) {
+    const storeduserid = localStorage.getItem("userid");
+    if (!storeduserid || !storedUsername) {
       navigate("/login");
     } else {
       setUsername(storedUsername);
-      fetchOrders(storedUserId);
+      fetchOrders(storeduserid);
     }
   });
 
-  const fetchOrders = async (userId: string) => {
+  const fetchOrders = async (userid: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:8082/api/order/history?userId=${userId}`
+        `http://localhost:8082/api/order/history?userid=${userid}`
       );
       setOrders(response.data.orders);
     } catch (error) {
